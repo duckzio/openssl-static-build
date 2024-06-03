@@ -23,9 +23,14 @@ jobs:
       run: choco install nasm
 
     - name: Add NASM to PATH
+      shell: powershell
       run: |
-        echo "::add-path::C:\\ProgramData\\chocolatey\\bin"
-        echo "::add-path::C:\\Program Files\\NASM"
+        $nasmPath = "C:\Program Files\NASM"
+        echo "NASM installed at $nasmPath"
+        echo "##[add-path]$nasmPath"
+
+    - name: Verify NASM installation
+      run: nasm -v
 
     - name: Download OpenSSL source
       run: git clone https://github.com/openssl/openssl.git
