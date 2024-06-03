@@ -29,12 +29,12 @@ jobs:
       run: nasm -v
 
     - name: Download OpenSSL source
-      run: git clone https://github.com/openssl/openssl.git
+      run: git clone --depth=1 https://github.com/openssl/openssl.git
 
     - name: Configure OpenSSL for MSVC static build
       run: |
         cd openssl
-        perl Configure VC-WIN64A no-shared --prefix=${{ github.workspace }}\install
+        perl Configure VC-WIN64A no-shared no-dso no-hw no-engine --prefix=${{ github.workspace }}\install
 
     - name: Build and install OpenSSL
       run: |
@@ -43,7 +43,7 @@ jobs:
         nmake install
 
     - name: Upload OpenSSL build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: openssl
         path: install
