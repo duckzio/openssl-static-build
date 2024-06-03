@@ -34,7 +34,7 @@ jobs:
     - name: Configure OpenSSL for MSVC static build
       run: |
         cd openssl
-        perl Configure VC-WIN64A no-shared --prefix=%cd%\install
+        perl Configure VC-WIN64A no-shared --prefix=${{ github.workspace }}\install
 
     - name: Build and install OpenSSL
       run: |
@@ -46,4 +46,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: openssl
-        path: openssl/install
+        path: install
