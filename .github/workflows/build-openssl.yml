@@ -22,13 +22,6 @@ jobs:
     - name: Install NASM
       run: choco install nasm
 
-    - name: Add NASM to PATH
-      shell: powershell
-      run: |
-        $nasmPath = "C:\Program Files\NASM"
-        echo "NASM installed at $nasmPath"
-        echo "##[add-path]$nasmPath"
-
     - name: Verify NASM installation
       run: nasm -v
 
